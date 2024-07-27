@@ -1,9 +1,15 @@
+import { useContext } from 'react'
+
 import { Header } from '../../components/header'
 import { Summary } from '../../components/summary'
 import { Search } from './components/search'
 import { PriceHighLight, Table, TransactionsContainer } from './styles'
+import { TransactionsContext } from '../../contexts/transactions-context'
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
 
 export function Transactions() {
+  const { transactions } = useContext(TransactionsContext)
+
   return (
     <div>
       <Header />
@@ -14,40 +20,23 @@ export function Transactions() {
 
         <Table>
           <tbody>
-            <tr>
-              <td>Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight $variant="income">R$ 12.000,00</PriceHighLight>
-              </td>
-              <td>Venda</td>
-              <td>30/07/2024</td>
-            </tr>
-            <tr>
-              <td>Hamburger</td>
-              <td>
-                <PriceHighLight $variant="outcome">- R$ 59,00</PriceHighLight>
-              </td>
-              <td>Alimentação</td>
-              <td>29/07/2024</td>
-            </tr>
-            <tr>
-              <td>Aluguel do apartamento</td>
-              <td>
-                <PriceHighLight $variant="outcome">
-                  - R$ 1.200,00
-                </PriceHighLight>
-              </td>
-              <td>Casa</td>
-              <td>28/07/2024</td>
-            </tr>
-            <tr>
-              <td>Computador</td>
-              <td>
-                <PriceHighLight $variant="income">R$ 5.400,00</PriceHighLight>
-              </td>
-              <td>Venda</td>
-              <td>30/07/2024</td>
-            </tr>
+            {transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id}>
+                  <td>{transaction.description}</td>
+                  <td>
+                    <PriceHighLight $variant={transaction.type}>
+                      {transaction.type === 'outcome' && '- '}
+                      {priceFormatter.format(transaction.price)}
+                    </PriceHighLight>
+                  </td>
+                  <td>{transaction.category}</td>
+                  <td>
+                    {dateFormatter.format(new Date(transaction.created_at))}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </TransactionsContainer>

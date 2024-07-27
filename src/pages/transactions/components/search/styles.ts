@@ -35,7 +35,7 @@ export const SearchContainer = styled.form`
     align-items: center;
     gap: 0.75rem;
 
-    &:hover {
+    &:not(:disabled):hover {
       background-color: ${({ theme }) => theme.COLORS.green500};
       border-color: ${({ theme }) => theme.COLORS.green500};
 
@@ -45,6 +45,11 @@ export const SearchContainer = styled.form`
         background-color 0.2s,
         color 0.2s,
         border-color 0.2s;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
     }
   }
 `
