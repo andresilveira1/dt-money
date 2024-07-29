@@ -8,7 +8,7 @@
 
 ## Introduction
 
-<p>This app was used to train new and old concepts as the hooks, State, Effect, Context and Callback. Looking for more performance the [useContextSelector](https://github.com/dai-shi/use-context-selector) has used to replace useContext. I understand that there is not a real problem with app, but i wanted learn more about performance.</p>
+This app was used to train new and old concepts as the hooks, State, Effect, Context and Callback. Looking for more performance the [useContextSelector](https://github.com/dai-shi/use-context-selector) has used to replace useContext. I understand that there is not a real problem with app, but i wanted learn more about performance.
 
 <p>The faker back-end json-server was used here.</p>
 
